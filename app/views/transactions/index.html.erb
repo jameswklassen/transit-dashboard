@@ -1,5 +1,9 @@
 <h1>All Transactions</h1>
 <p>List of all transactions</p>
+
+<p>
+  <%= link_to('New transaction', new_transaction_path) %>
+</p>
 <hr>
 
 <% @transactions.each do |transaction| %>

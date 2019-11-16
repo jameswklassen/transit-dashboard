@@ -2,5 +2,5 @@
 
 Rails.application.routes.draw do
   root to: 'transactions#index'
-  resources :transactions, only: [:index, :show]
+  resources :transactions, only: %i[index show]
 end

@@ -1,0 +1,7 @@
+<h1>Transaction <%= @transaction.transaction_number %></h1>
+
+<% @transaction.attributes.each do |key, value| %>
+  <div>
+    <%= "#{key}: #{value}"%>
+  </div>
+<% end %>

@@ -1,2 +1,10 @@
-<h1>Transactions#index</h1>
+<h1>All Transactions</h1>
 <p>List of all transactions</p>
+<hr>
+
+<% @transactions.each do |transaction| %>
+  <%= link_to(transaction.transaction_number, transaction_path(transaction)) %>
+  <h2><%= transaction.location %></h2>
+  <%= transaction.date %>
+  <hr>
+<% end %>

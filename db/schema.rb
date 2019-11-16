@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 20_191_116_211_925) do
     t.integer 'transaction_number'
     t.string 'transit_agency'
     t.string 'location'
-    t.string 'type'
+    t.string 'transaction_type'
     t.string 'service_class'
     t.decimal 'discount'
     t.decimal 'amount'

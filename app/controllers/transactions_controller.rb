@@ -24,6 +24,30 @@ class TransactionsController < ApplicationController
     redirect_to(transactions_path) if @transaction.nil?
   end
 
+  def upload
+    CSV.foreach(params[:file].path, headers: true, header_converters: ->(h) { h.parameterize.underscore }) do |row|
+      transaction_for_row = {
+        date: row['date'],
+        transaction_number: row['transaction_number'],
+        transit_agency: row['transit_agency'],
+        location: row['location'],
+        transaction_type: row['type'],
+        service_class: row['service_class'],
+        discount: row['discount'],
+        amount: row['amount'],
+        balance: row['balance']
+      }
+
+      if current_user.transactions.create(transaction_for_row)
+        flash[:notice] = 'created'
+      else
+        flash[:error] = 'Error creating transaction.'
+      end
+    end
+
+    redirect_to transactions_path
+  end
+
   private
 
   def transaction_params

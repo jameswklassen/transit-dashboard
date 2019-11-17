@@ -6,6 +6,12 @@
 </p>
 <hr>
 
+
+<%= form_with(url: {action: :upload}, multipart: true) do %>
+  <%= file_field_tag 'file' %>
+  <%= submit_tag("upload") %>
+<% end %>
+
 <% @transactions.each do |transaction| %>
   <%= link_to(transaction.transaction_number, transaction_path(transaction)) %>
   <h2><%= transaction.location %></h2>

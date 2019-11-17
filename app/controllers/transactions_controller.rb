@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class TransactionsController < ApplicationController
+  require 'csv'
+
   def new
     @transaction = Transaction.new
   end

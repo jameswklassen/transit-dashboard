@@ -1,20 +1,12 @@
 <h1>All Transactions</h1>
-<p>List of all transactions</p>
-
-<p>
-  <%= link_to('New transaction', new_transaction_path) %>
-</p>
-<hr>
-
 
 <%= form_with(url: {action: :upload}, multipart: true) do %>
   <%= file_field_tag 'file' %>
-  <%= submit_tag("upload") %>
+  <%= submit_tag("Upload CSV") %>
 <% end %>
+<hr>
+
 
 <% @transactions.each do |transaction| %>
-  <%= link_to(transaction.transaction_number, transaction_path(transaction)) %>
-  <h2><%= transaction.location %></h2>
-  <%= transaction.date %>
-  <hr>
+  <%= react_component("Transaction", { transaction: transaction, link: transaction_path(transaction) }) %>
 <% end %>

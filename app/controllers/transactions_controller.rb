@@ -29,7 +29,7 @@ class TransactionsController < ApplicationController
   def upload
     CSV.foreach(params[:file].path, headers: true, header_converters: ->(h) { h.parameterize.underscore }) do |row|
       transaction_for_row = {
-        date: row['date'],
+        date: Time.strptime(row['date'], '%m/%d/%Y %I:%M:%S %p'),
         transaction_number: row['transaction_number'],
         transit_agency: row['transit_agency'],
         location: row['location'],

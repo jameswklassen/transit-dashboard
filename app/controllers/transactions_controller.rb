@@ -6,7 +6,7 @@ class TransactionsController < ApplicationController
   end
 
   def create
-    if Transaction.new(transaction_params).save
+    if current_user.transactions.create(transaction_params)
       flash[:notice] = 'created'
       redirect_to(transactions_path)
     else
@@ -15,11 +15,13 @@ class TransactionsController < ApplicationController
   end
 
   def index
-    @transactions = Transaction.all
+    @transactions = current_user.transactions
   end
 
   def show
-    @transaction = Transaction.find(params[:id])
+    @transaction = current_user.transactions.find(params[:id])
+
+    redirect_to(transactions_path) if @transaction.nil?
   end
 
   private
@@ -34,7 +36,8 @@ class TransactionsController < ApplicationController
       :service_class,
       :discount,
       :amount,
-      :balance
+      :balance,
+      :user_id
     )
   end
 end

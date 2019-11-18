@@ -17,7 +17,7 @@ class TransactionsController < ApplicationController
   end
 
   def index
-    @transactions = current_user.transactions
+    @transactions = current_user.transactions.order(id: :asc)
   end
 
   def show

@@ -59,7 +59,7 @@ class Navigation extends React.Component {
 
 Navigation.propTypes = {
   newTransaction: PropTypes.string,
-  currentUser: PropTypes.class,
+  currentUser: PropTypes.function,
   signedIn: PropTypes.boolean,
   editUser: PropTypes.string,
   logout: PropTypes.string,

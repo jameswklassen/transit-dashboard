@@ -5,31 +5,31 @@
 <%= form_with model: @transaction  do |f| %>
 
   <%= f.label :date %>
-  <%= f.text_field :date %>
+  <%= f.text_field :date, class: 'form-control' %>
   <br>
   <%= f.label :transaction_number %>
-  <%= f.text_field :transaction_number %>
+  <%= f.text_field :transaction_number, class: 'form-control' %>
   <br>
   <%= f.label :transit_agency %>
-  <%= f.text_field :transit_agency %>
+  <%= f.text_field :transit_agency, class: 'form-control' %>
   <br>
   <%= f.label :location %>
-  <%= f.text_field :location %>
+  <%= f.text_field :location, class: 'form-control' %>
   <br>
   <%= f.label :transaction_type %>
-  <%= f.text_field :transaction_type %>
+  <%= f.text_field :transaction_type, class: 'form-control' %>
   <br>
   <%= f.label :service_class %>
-  <%= f.text_field :service_class %>
+  <%= f.text_field :service_class, class: 'form-control' %>
   <br>
   <%= f.label :discount %>
-  <%= f.text_field :discount %>
+  <%= f.text_field :discount, class: 'form-control' %>
   <br>
   <%= f.label :amount %>
-  <%= f.text_field :amount %>
+  <%= f.text_field :amount, class: 'form-control' %>
   <br>
   <%= f.label :balance %>
-  <%= f.text_field :balance %>
+  <%= f.text_field :balance, class: 'form-control' %>
   <br>
-  <%= f.submit "Create" %>
+  <%= f.submit "Create", class: 'btn btn-primary' %>
 <% end %>

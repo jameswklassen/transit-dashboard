@@ -10,13 +10,7 @@ class Transaction extends React.Component {
       <Card>
         <Card.Body>
           <h2>{ this.props.transaction.location }</h2>
-          <p>{ this.props.transaction.date }</p>
-          <Button
-            href={this.props.link}
-            variant="light"
-          >
-            View details
-          </Button>
+          <p className='muted'>{ this.props.transaction.date }</p>
           { this.transactionFields() }
         </Card.Body>
       </Card>
@@ -25,7 +19,7 @@ class Transaction extends React.Component {
   transactionFields () {
     return Object.keys(this.props.transaction).map(key => {
       return(
-        <p>
+        <p className={this.props.transaction[key]}>
           <b>{ key }: </b>
           { this.props.transaction[key] }
         </p>
@@ -35,6 +29,6 @@ class Transaction extends React.Component {
 }
 
 Transaction.propTypes = {
-  transaction: PropTypes.class
+  transaction: PropTypes.function
 };
 export default Transaction

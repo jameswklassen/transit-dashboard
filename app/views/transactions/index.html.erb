@@ -1,36 +1,7 @@
 <h1>All Transactions</h1>
 
-<div class="card">
-  <div class="card-body">
-    <h5 class="card-title">CSV Import</h5>
-    <%= form_with(url: {action: :upload}, multipart: true) do %>
-      <%= file_field_tag 'file' %>
-      <%= submit_tag("Upload CSV") %>
-    <% end %>
-  </div>
-</div>
-
 <% if @transactions.any? %>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Transaction Number</th>
-        <th>Location</th>
-        <th>Agency</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @transactions.each do |transaction| %>
-        <tr>
-          <td><%=link_to transaction.id, transaction_path(transaction) %></td>
-          <td><%= transaction.transaction_number %></td>
-          <td><%= transaction.location %></td>
-          <td><%= transaction.transit_agency %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  <table>
+  <%= render 'table', transactions: @transactions%>
 <% else %>
   <div class="alert alert-primary" role="alert">
     No transactions :(

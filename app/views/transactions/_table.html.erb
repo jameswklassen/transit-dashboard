@@ -1,0 +1,18 @@
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Location</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% transactions.each do |transaction| %>
+        <tr>
+          <td><%=link_to transaction.id, transaction_path(transaction) %></td>
+          <td><%= link_to transaction.location.titleize, "https://www.google.ca/maps/search/#{transaction.location}"%></td>
+          <td><%= l transaction.date.localtime, format: :long %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  <table>

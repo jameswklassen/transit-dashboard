@@ -1,1 +1,7 @@
-<%= react_component("Transaction", { transaction: @transaction }) %>
+<h1>Transaction <%= @transaction.location.titleize %></h1>
+
+<% @transaction.attributes.each do |key, value| %>
+  <div>
+    <%= "#{key}: #{value}"%>
+  </div>
+<% end %>

@@ -1,6 +1,13 @@
 <h1>All Transactions</h1>
 
 <% if @transactions.any? %>
+  <% limit = 3%>
+
+  <h2>Top <%= limit %> stops</h2>
+  <% TransactionsHelper::top_stops(@transactions, limit=limit).each do |transaction| %>
+    <li><%= transaction.location %>(<%= transaction.count %>)</li>
+  <% end %>
+
   <h2>Mornings</h2>
   <%= render 'table', transactions: @transactions.morning %>
   
@@ -8,7 +15,7 @@
   <%= render 'table', transactions: @transactions.afternoon %>
 
   <h2>All</h2>
-  <% render 'table', transactions: @transactions %>
+  <%= render 'table', transactions: @transactions.order(id: :asc) %>
 <% else %>
   <div class="alert alert-primary" role="alert">
     No transactions :(

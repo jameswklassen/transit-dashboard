@@ -1,7 +1,14 @@
 <h1>All Transactions</h1>
 
 <% if @transactions.any? %>
-  <%= render 'table', transactions: @transactions%>
+  <h2>Mornings</h2>
+  <%= render 'table', transactions: @transactions.morning %>
+  
+  <h2>Afternoons</h2>
+  <%= render 'table', transactions: @transactions.afternoon %>
+
+  <h2>All</h2>
+  <% render 'table', transactions: @transactions %>
 <% else %>
   <div class="alert alert-primary" role="alert">
     No transactions :(

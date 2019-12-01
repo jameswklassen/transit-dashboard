@@ -1,0 +1,11 @@
+<% content = yield || local_assigns.fetch(:content) %>
+<% color = local_assigns[:color] || 'secondary' %>
+
+<div class="card <%= local_assigns[:style] %>-<%= color %> shadow h-100 py-2 my-4">
+  <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+    <h6 class="m-0 font-weight-bold text-primary"><%= local_assigns[:title] %></h6>
+  </div>
+  <div class="card-body">
+    <%= content %>
+  </div>
+</div>

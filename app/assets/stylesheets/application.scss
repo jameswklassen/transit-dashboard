@@ -13,3 +13,10 @@
  *= require_tree .
  *= require_self
  */
+
+// @import "bootstrap";
+@import "font-awesome";
+
+#wrapper #content-wrapper {
+  min-height: 100vh;
+}

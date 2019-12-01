@@ -6,17 +6,23 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' =>  true %>
   </head>
 
   <body>
-    <%= render 'shared/navigation'%>
-    <div class="container">
-      <%= yield %>
+    <div id="wrapper">
+      <div id="content-wrapper" class="d-flex flex-column">
+        <div id="content">
+          <% if current_user %>
+            <%= render 'shared/navigation'%>
+          <% end %>
+          <!-- Begin Page Content -->
+          <div class="container-fluid">
+            <%= yield %>
+          </div>
+        </div>
+      </div>
     </div>
   </body>
 </html>

@@ -1,21 +1,28 @@
-<h1>All Transactions</h1>
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+  <h1 class="h3 mb-0 text-gray-800">All Transactions</h1>
+</div>
 
 <% if @transactions.any? %>
   <% limit = 3%>
 
-  <h2>Top <%= limit %> stops</h2>
-  <% TransactionsHelper::top_stops(@transactions, limit=limit).each do |transaction| %>
-    <li><%= transaction.location %>(<%= transaction.count %>)</li>
+  <%= render 'shared/card', title: "Top #{limit} stops" do %>
+    <% TransactionsHelper::top_stops(@transactions, limit=limit).each do |transaction| %>
+      <h4 class="h4"><%= transaction.location.titleize %></h4>
+      <%= transaction.count %> times
+    <% end %>
   <% end %>
 
-  <h2>Mornings</h2>
-  <%= render 'table', transactions: @transactions.morning %>
+  <%= render 'shared/card', title: 'Mornings' do %>
+    <%= render 'table', transactions: @transactions.morning %>
+  <% end %>
   
-  <h2>Afternoons</h2>
-  <%= render 'table', transactions: @transactions.afternoon %>
+  <%= render 'shared/card', title: 'Afternoons' do %>
+    <%= render 'table', transactions: @transactions.afternoon %>
+  <% end %>
 
-  <h2>All</h2>
-  <%= render 'table', transactions: @transactions.order(id: :asc) %>
+  <%= render 'shared/card', title: 'All' do %>
+    <%= render 'table', transactions: @transactions %>
+  <% end %>
 <% else %>
   <div class="alert alert-primary" role="alert">
     No transactions :(

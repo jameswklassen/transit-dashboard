@@ -1,5 +1,9 @@
-<h5>Import by CSV</h5>
-<%= form_with(url: {action: :upload}, multipart: true) do %>
-  <%= file_field_tag 'file' %>
-  <%= submit_tag("Upload CSV") %>
+<%= render 'shared/card', title: 'Import by CSV' do %>
+  <%= form_with(url: {action: :upload}, multipart: true) do %>
+    <%= file_field_tag 'file' %>
+    <%= button_tag type: :submit, class: 'btn btn-primary btn-icon-split' do %>
+      <span class="icon"><%= fa_icon 'upload' %></span>
+      <span class="text">Upload CSV</span>
+    <% end %>
+  <% end %>
 <% end %>

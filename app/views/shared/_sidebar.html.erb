@@ -1,0 +1,38 @@
+<% if current_user %>
+  <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+    <!-- Sidebar - Brand -->
+    <%= link_to root_path, class: 'sidebar-brand d-flex align-items-center justify-content-center' do %>
+      <div class="sidebar-brand-icon">
+        <h2>🚌</h2>
+      </div>
+      <div class="sidebar-brand-text mx-3">Transit Dashboard</div>
+    <% end %>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider my-0">
+
+    <!-- Nav Item - Dashboard -->
+    <li class="nav-item <%= active_class('/') %>">
+      <%= link_to root_path, class: 'nav-link' do %>
+        <%= fa_icon 'tachometer' %>
+        <span>Dashboard</span>
+      <% end %>
+    </li>
+    <li class="nav-item <%= active_class('/transactions/new') %>">
+      <%= link_to new_transaction_path, class: 'nav-link' do %>
+        <%= fa_icon 'plus' %>
+        <span>Add Transactions</span>
+      <% end %>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider d-none d-md-block">
+
+    <!-- Sidebar Toggler (Sidebar) -->
+    <div class="text-center d-none d-md-inline">
+      <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    </div>
+
+  </ul>
+<% end %>

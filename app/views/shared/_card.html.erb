@@ -1,11 +1,35 @@
 <% content = yield || local_assigns.fetch(:content) %>
-<% color = local_assigns[:color] || 'secondary' %>
+<% color = local_assigns[:color] || 'primary' %>
+<% border = local_assigns[:border] || ''%>
+<% type = local_assigns[:type] %>
 
-<div class="card <%= local_assigns[:style] %>-<%= color %> shadow h-100 py-2 my-4">
-  <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-    <h6 class="m-0 font-weight-bold text-primary"><%= local_assigns[:title] %></h6>
-  </div>
-  <div class="card-body">
-    <%= content %>
-  </div>
-</div>
+<% if type == :generic || type.blank? %>
+  <%= content_tag :div, class: "card #{local_assigns[:style]}-#{color} shadow h-100 my-4" do %>
+    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+      <h6 class="m-0 font-weight-bold text-primary"><%= local_assigns[:title] %></h6>
+    </div>
+    <div class="card-body">
+      <%= content %>
+    </div>
+  <% end %>
+<% end %>
+
+<% if type == :highlight %>
+  <%= content_tag :div, class: "card border-left#{local_assigns[:style]}-#{color} shadow py-2 h-100" do %>
+    <div class="card-body">
+      <div class="row no-gutters align-items-center">
+        <div class="col mr-2">
+          <%= content_tag :div, class: "text-xs font-weight-bold text-#{color} text-uppercase mb-1" do %>
+          <%= local_assigns[:title] %>
+          <% end %>
+          <%= content_tag :div, class: "h5 mb-0 font-weight-bold text-gray-800" do %>
+            <%= content %>
+          <% end %>
+        </div>
+        <div class="col-auto">
+          <%= fa_icon local_assigns[:icon], class: 'fa-2x' %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>

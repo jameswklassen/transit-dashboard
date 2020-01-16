@@ -1,36 +1,32 @@
-<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-  <%= link_to root_path do %>
-    <h3 class="h3 mb-0 text-gray-800">🚌 Transit Dashboard</h3>
-  <% end %>
-  <!-- Topbar Navbar -->
-  <ul class="navbar-nav ml-auto">
+<% if current_user %>
+  <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+      <i class="fa fa-bars"></i>
+    </button>
 
-    <li class="nav-item">
-      <%= link_to new_transaction_path, class: 'nav-link' do %>
-        <span class="mr-2 d-none d-lg-inline text-gray-600 small">Add Transactions</span>
-      <% end %>
-    </li>
-    
-    <div class="topbar-divider d-none d-sm-block"></div>
+    <!-- Topbar Navbar -->
+    <ul class="navbar-nav ml-auto">
+      <div class="topbar-divider d-none d-sm-block"></div>
 
-    <li class="nav-item dropdown no-arrow">
-      <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <span class="mr-2 d-none d-lg-inline text-gray-600 small"><%= current_user.email %></span>
-        <span class="img-profile rounded-circle bg-gray-600" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
-        </span>
-      </a>
-      <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-        <%= link_to edit_user_registration_path, class: 'dropdown-item navbar-link' do %>
-          <span class="text-gray-400"><%= fa_icon "user"%></span>
-          Edit Profile
-        <% end %>
-        
-        <div class="dropdown-divider"></div>
-        <%= link_to destroy_user_session_path, method: :delete, class: 'dropdown-item navbar-link' do %>
-          <span class="text-gray-400"><%= fa_icon "sign-out"%></span>
-          Logout
-        <% end %>
-      </div>
-    </li>
-  </ul>
-</nav>
+      <li class="nav-item dropdown no-arrow">
+        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <span class="mr-2 d-none d-lg-inline text-gray-600 small"><%= current_user.email %></span>
+          <span class="img-profile rounded-circle bg-gray-600" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+          </span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+          <%= link_to edit_user_registration_path, class: 'dropdown-item navbar-link' do %>
+            <span class="text-gray-400"><%= fa_icon "user"%></span>
+            Edit Profile
+          <% end %>
+          
+          <div class="dropdown-divider"></div>
+          <%= link_to destroy_user_session_path, method: :delete, class: 'dropdown-item navbar-link' do %>
+            <span class="text-gray-400"><%= fa_icon "sign-out"%></span>
+            Logout
+          <% end %>
+        </div>
+      </li>
+    </ul>
+  </nav>
+<% end %>

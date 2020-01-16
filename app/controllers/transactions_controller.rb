@@ -17,7 +17,7 @@ class TransactionsController < ApplicationController
   end
 
   def index
-    @transactions = current_user.transactions
+    @transactions = current_user.transactions.where(transaction_type: :transit_pass_payment)
   end
 
   def show
@@ -27,17 +27,20 @@ class TransactionsController < ApplicationController
   end
 
   def upload
+    PP.pp Time.zone
+
     CSV.foreach(params[:file].path, headers: true, header_converters: ->(h) { h.parameterize.underscore }) do |row|
       transaction_for_row = {
         date: Time.strptime(row['date'], '%m/%d/%Y %I:%M:%S %p'),
         transaction_number: row['transaction_number'],
-        transit_agency: row['transit_agency'],
-        location: row['location'],
-        transaction_type: row['type'],
-        service_class: row['service_class'],
+        transit_agency: row['transit_agency'].parameterize.underscore,
+        location: row['location'].parameterize.underscore,
+        transaction_type: row['type'].parameterize.underscore,
+        service_class: row['service_class'].parameterize.underscore,
         discount: row['discount'],
         amount: row['amount'],
-        balance: row['balance']
+        balance: row['balance'],
+        time_zone: time_zone
       }
 
       if current_user.transactions.create(transaction_for_row)
@@ -63,7 +66,12 @@ class TransactionsController < ApplicationController
       :discount,
       :amount,
       :balance,
+      :time_zone,
       :user_id
     )
+  end
+
+  def time_zone
+    'ET'
   end
 end

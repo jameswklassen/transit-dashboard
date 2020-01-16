@@ -27,8 +27,6 @@ class TransactionsController < ApplicationController
   end
 
   def upload
-    PP.pp Time.zone
-
     CSV.foreach(params[:file].path, headers: true, header_converters: ->(h) { h.parameterize.underscore }) do |row|
       transaction_for_row = {
         date: Time.strptime(row['date'], '%m/%d/%Y %I:%M:%S %p'),

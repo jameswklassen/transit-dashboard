@@ -23,3 +23,8 @@
     <%= link_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider) %><br />
   <% end %>
 <% end %>
+
+<hr>
+<p class="muted">Don't want an account?
+<%= link_to 'View sample data', new_session_path(resource_name) %><br />
+</p>

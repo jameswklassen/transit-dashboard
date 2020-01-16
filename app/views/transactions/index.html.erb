@@ -1,27 +1,51 @@
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-  <h1 class="h3 mb-0 text-gray-800">All Transactions</h1>
+  <div class="col-xl-4 col-md-6 mb-4">
+    <h1 class="h3 mb-0 text-gray-800">All Transactions</h1>
+  </div>
 </div>
+
 
 <% if @transactions.any? %>
   <% limit = 3%>
 
-  <%= render 'shared/card', title: "Top #{limit} stops" do %>
-    <% TransactionsHelper::top_stops(@transactions, limit=limit).each do |transaction| %>
-      <h4 class="h4"><%= transaction.location.titleize %></h4>
-      <%= transaction.count %> times
+  <div class="row">
+    <div class="col-xl-4 col-md-6 mb-4">
+      <%= render 'shared/card', title: "Top Stop", type: :highlight, icon: 'chart-line', color: :success do %>
+        <%= @transactions.top(:location).first.first.titleize %>
+      <% end %>
+    </div>
+
+    <div class="col-xl-4 col-md-6 mb-4">
+      <%= render 'shared/card', title: "Most recent stop", type: :highlight, icon: 'clock', color: :primary do %>
+        <%= TransactionsHelper::recent_locations(@transactions).first.location.titleize %>
+      <% end %>
+    </div>
+    
+      <div class="col-xl-4 col-md-6 mb-4">
+      <%= render 'shared/card', title: "Unique Stops", type: :highlight, icon: 'info-circle', color: :warning do %>
+        <%= TransactionsHelper::unique_locations(@transactions).count %>
+      <% end %>
+    </div>
+  </div>
+
+  <%= render 'shared/card', title: "Top stops" do %>
+    <%= pie_chart @transactions.group(:location).order('count(location) desc').limit(nil).count %>
+    <% @transactions.top(:location, limit).each do |transaction| %>
+      <h4 class="h4"><%= transaction.first.titleize %></h4>
+      <%= transaction.second %> times
     <% end %>
   <% end %>
 
-  <%= render 'shared/card', title: 'Mornings' do %>
-    <%= render 'table', transactions: @transactions.morning %>
-  <% end %>
-  
-  <%= render 'shared/card', title: 'Afternoons' do %>
-    <%= render 'table', transactions: @transactions.afternoon %>
+  <%= render 'shared/card', title: 'Uses per day' do %>
+    <%= line_chart @transactions.group_by_day(:date, time_zone: 'EST').count %>
   <% end %>
 
-  <%= render 'shared/card', title: 'All' do %>
-    <%= render 'table', transactions: @transactions %>
+  <%= render 'shared/card', title: 'Stops by month' do %>
+    <%= pie_chart @transactions.group_by_month(:date, time_zone: 'EST').count %>
+  <% end %>
+
+  <%= render 'shared/card', title: 'All Transactions' do %>
+    <%= render 'table', transactions: @transactions.order(:date) %>
   <% end %>
 <% else %>
   <div class="alert alert-primary" role="alert">

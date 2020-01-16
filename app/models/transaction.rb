@@ -3,11 +3,22 @@
 class Transaction < ApplicationRecord
   belongs_to :user
   
-  scope :morning, -> {
-    where('extract(hour from date) between 0 and 11')
-  }
+  morning = []
+  afternoon = []
+  
+  0.upto(23) do |hour|
+    if (hour + Time.zone_offset('EST') / 3600) % 24 < 12
+      morning << hour
+    else
+      afternoon << hour
+    end
+  end
 
+  scope :morning, -> {
+    where('extract(hour from date) in (?)', morning)
+  }
+  
   scope :afternoon, -> {
-    where('extract(hour from date) between 12 and 23')
+    where('extract(hour from date) in (?)', afternoon)
   }
 end

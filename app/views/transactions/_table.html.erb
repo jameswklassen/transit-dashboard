@@ -1,7 +1,6 @@
 <table>
   <thead>
     <tr>
-      <th>ID</th>
       <th>Location</th>
       <th>Date</th>
     </tr>
@@ -9,8 +8,12 @@
   <tbody>
     <% transactions.each do |transaction| %>
       <tr>
-        <td><%=link_to transaction.id, transaction_path(transaction) %></td>
-        <td><%= link_to transaction.location.titleize, "https://www.google.ca/maps/search/#{transaction.location}"%></td>
+        <td>
+          <%= link_to "https://www.google.ca/maps/search/#{transaction.location}" do %>
+            <%= fa_icon 'map-marker'%>
+          <% end %>
+          <%=link_to transaction.location.titleize, transaction_path(transaction) %>
+        </td>
         <td><%= l transaction.date.localtime, format: :long %></td>
       </tr>
     <% end %>

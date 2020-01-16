@@ -24,7 +24,7 @@ gem 'jbuilder', '~> 2.7'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
-gem 'react-rails'
+gem "chartkick"
 
 gem 'devise'
 
@@ -33,6 +33,9 @@ gem 'jquery-rails'
 gem 'bootstrap'
 
 gem 'font-awesome-rails'
+
+gem 'groupdate'
+gem 'hightop'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'

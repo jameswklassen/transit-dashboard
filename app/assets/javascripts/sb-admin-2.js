@@ -1,8 +1,10 @@
-(function($) {
+$(document).ready(function() {
   "use strict"; // Start of use strict
+  console.log('hey')
 
   // Toggle the side navigation
   $("#sidebarToggle, #sidebarToggleTop").on('click', function(e) {
+    console.log('fuck')
     $("body").toggleClass("sidebar-toggled");
     $(".sidebar").toggleClass("toggled");
     if ($(".sidebar").hasClass("toggled")) {
@@ -46,4 +48,4 @@
     e.preventDefault();
   });
 
-})(jQuery); // End of use strict
+})

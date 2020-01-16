@@ -3,11 +3,8 @@
 module TransactionsHelper
   module_function
 
-  def top_stops(transactions, limit = nil)
-    transactions.select(:location, 'COUNT(location)')
-                .group(:location)
-                .order('COUNT(location) DESC')
-                .limit(limit)
+  def recent_locations(transactions, limit = nil)
+    transactions.order(date: :desc).limit(limit)
   end
 
   def average_time(transactions)
@@ -15,13 +12,17 @@ module TransactionsHelper
     minutes = []
 
     count = transactions.pluck(:date).each do |date|
-      hours << date.localtime.hour
-      minutes << date.localtime.min
+      hours << date.hour
+      minutes << date.min
     end.count
 
     average_hour = hours.sum / count
-    average_minute = minutes.sum / count
+    average_min = minutes.sum / count
 
-    Time.now.change(hour: average_hour, min: average_minute)
+    Time.now.change(hour: average_hour, min: average_min)
+  end
+  
+  def unique_locations(transactions)
+    transactions.select(:location).distinct
   end
 end

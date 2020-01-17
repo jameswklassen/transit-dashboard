@@ -4,8 +4,7 @@ A way to visualize CSV public transit data on a dashboard with stats.
 
 ## Table of Contents
 - [Introduction](#introduction)
-  - Getting Started
-  - 
+- [Database](#database)
 
 
 ## Introduction

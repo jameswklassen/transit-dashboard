@@ -1,24 +1,35 @@
-# README
+# transit-dashboard 🚌
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A way to visualize CSV public transit data on a dashboard with stats.
 
-Things you may want to cover:
+## Table of Contents
+- [Introduction](#introduction)
+- [Database](#database)
 
-* Ruby version
 
-* System dependencies
+## Introduction
 
-* Configuration
+![overview1](docs/overview1.png)
+![overview2](docs/overview2.png)
 
-* Database creation
+## Installation
 
-* Database initialization
+### Getting Started
 
-* How to run the test suite
+To start, clone the repository and navigate to it.
 
-* Services (job queues, cache servers, search engines, etc.)
+```sh
+# Clone the repository
+git clone git@github.com:jameswklassen/transit-dashboard.git
+cd transit-dashboard
+```
 
-* Deployment instructions
 
-* ...
+Once navigated to the repository run `bundle install && yarn install` to install all necessary dependencies.
+
+### Database
+
+To initialize the database, run
+```sh
+rake db:schema:load
+```
